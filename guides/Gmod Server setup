@@ -1,0 +1,115 @@
+# Setting Up a Garry's Mod (GMod) Server: A Step-by-Step Guide  
+Author: Lucalis, Owner of Shadow Haven
+
+## Introduction  
+This guide will take you through the process of setting up your own Garry's Mod (GMod) server, covering everything from obtaining a Game Server Login Token (GSLT) to configuring addons and workshop items. We will also discuss important topics like choosing a reputable hosting provider (like Physgun), selecting safe addons from trusted sources, and ensuring your server remains secure by avoiding backdoors.
+
+## Requirements  
+Before you start setting up your server, here are some things you'll need:
+
+* **A dedicated server or VPS** (unless you’re using a hosted solution like Physgun).
+* **SteamCMD** (for downloading server files).
+* **A Game Server Login Token (GSLT)** from Steam.
+* **Garry's Mod server files** – or use a hosting provider.
+* **Workshop Collection IDs** (if you’re using workshop addons).
+* **Addons from reputable stores** (e.g., GmodStore).
+* **Basic understanding of configuring files**.
+
+### Step Process
+
+### 1. Physgun Hosted Servers  
+Physgun is a reliable GMod hosting provider offering fully managed server setups. If you prefer a hosted solution, this is a good option:
+
+   1. Visit the [Physgun website](https://physgun.com/).
+   2. Create an account, select your server plan, and follow the easy setup instructions.
+   3. Physgun provides a user-friendly control panel where you can install and manage your addons, configure your server, and monitor performance.
+
+### 2. Installing SteamCMD (Manual Setup)  
+If you’re setting up your server manually:
+
+   1. Download SteamCMD from the official Valve website: https://developer.valvesoftware.com/wiki/SteamCMD.
+   2. Extract the contents and run `steamcmd.exe` to install the GMod server files.
+
+### 3. Downloading Garry's Mod Server Files  
+In SteamCMD, log in anonymously and download the GMod server files:
+
+   1. Open SteamCMD and type:  
+   ``` 
+   login anonymous  
+   app_update 4020 validate 
+   ```
+
+### 4. Getting Your GSLT (Game Server Login Token)  
+To make your server publicly accessible, you need a Game Server Login Token from Steam:
+
+   1. Go to: https://steamcommunity.com/dev/managegameservers.
+   2. Select Garry's Mod (App ID: 4000) and generate a token.
+
+### 5. Configuring the Server  
+Once your server files are in place:
+
+   1. Open the `garrysmod/cfg` directory.
+   2. Edit the `server.cfg` file and add:  
+   ```
+   hostname "Your Server Name"
+   sv_password ""  
+   sv_setsteamaccount "Your GSLT"
+   ```
+
+### 6. Choosing Addons from Reputable Sources  
+Using safe, high-quality addons is crucial for server performance and security. Here’s how to ensure you're getting trusted addons:
+
+#### Reputable Sources for Addons:
+   1. **GmodStore**:  
+   GmodStore is one of the most trusted online platforms for GMod addons. It offers a wide variety of paid and free addons created by reputable developers. Addons from GmodStore are vetted to ensure they meet certain standards, and many come with active support from the developers.
+
+   2. **Steam Workshop**:  
+   While the Steam Workshop is another source for GMod addons, not all Workshop content is moderated. Always check the addon’s reviews, ratings, and comments to see if other users have reported issues such as bugs or security risks.
+
+#### Checking for Backdoors in Addons:  
+   1. **Inspect the Code**:  
+   Before installing an addon, check its files for suspicious code, such as hidden backdoors or malware. Look for any files that appear unrelated to the addon’s function, especially those involving Lua code that interacts with server permissions or players.
+
+   2. **Check for Known Backdoors**:  
+   Some malicious developers embed backdoors into their addons to exploit your server later. Common Lua-based backdoors may grant unauthorized users admin rights or execute harmful commands. Ensure you download addons only from reputable developers, and you can use community tools like [GMod backdoor scanners](https://github.com/DeadmanLua/backdoor-scanner) to check for vulnerabilities.
+
+   3. **Monitor Addon Performance**:  
+   After installing an addon, regularly check server logs for unusual activity. If your server starts behaving strangely (e.g., unexpected crashes or strange user activity), it could be due to a malicious addon.
+
+#### Stay Up-to-Date:
+   - Always ensure your addons are kept up to date, as reputable developers will frequently release patches to address bugs or security vulnerabilities.
+
+### 7. Adding Workshop Addons  
+For both hosted and self-hosted servers, adding Workshop content is straightforward:
+
+   1. Create a Steam Workshop collection and add your desired addons.
+   2. Copy the Workshop Collection ID and, in the `server.cfg` file (or Physgun's control panel), add:  
+   ```
+   resource.AddWorkshop("CollectionID")
+   ```
+
+### 8. Port Forwarding (Manual Setup)  
+For manual server setups, port forwarding is needed to make your server accessible online:
+
+   1. Open your router settings and forward the necessary ports:  
+   ```
+   27015 (Default game port)
+   27005 (Client traffic)
+   ```
+
+Physgun hosted servers handle all network settings automatically.
+
+### 9. Starting the Server  
+Manually hosted servers can be started by running this command in your terminal:  
+```
+srcds.exe -game garrysmod +map gm_flatgrass +maxplayers 16 +gamemode sandbox
+```
+
+For Physgun users, use their control panel to start your server.
+
+### 10. Testing and Troubleshooting  
+After starting your server, join it from your GMod client to ensure it's working. Check the console and logs for any errors related to addons or configurations. If you detect issues, carefully review your addons and settings to troubleshoot.
+
+---
+
+This guide provides everything you need to set up a secure, stable GMod server using either a self-hosted or hosted solution like Physgun. Remember to choose your addons from reputable sources like GmodStore and regularly check for backdoors to keep your server safe and reliable. Happy hosting!
